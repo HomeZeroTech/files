@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="utf-8">
+        <meta charset="utf-8" />
         <title>Service Temporarily Unavailable</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <style type="text/css">
             * {
                 box-sizing: border-box;
@@ -12,7 +12,8 @@
                 margin: 0;
                 padding: 20px;
                 background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                    Roboto, sans-serif;
                 line-height: 1.6;
                 color: #333;
                 min-height: 100vh;
@@ -83,7 +84,9 @@
                 margin-bottom: 4px;
                 font-size: 14px;
             }
-            input[type="text"], input[type="email"], input[type="tel"] {
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"] {
                 width: 100%;
                 padding: 8px 12px;
                 border: 2px solid #e9ecef;
@@ -92,7 +95,9 @@
                 transition: border-color 0.2s, box-shadow 0.2s;
                 background: white;
             }
-            input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus {
+            input[type="text"]:focus,
+            input[type="email"]:focus,
+            input[type="tel"]:focus {
                 outline: none;
                 border-color: #6c757d;
                 box-shadow: 0 0 0 2px rgba(108, 117, 125, 0.08);
@@ -173,152 +178,325 @@
             <h1>Service Temporarily Unavailable</h1>
             <p class="subtitle">We're working hard to restore service</p>
             <p class="description">
-                Our application is currently undergoing maintenance or experiencing technical difficulties. 
-                We apologize for any inconvenience and are working to resolve this as quickly as possible.
+                Our application is currently undergoing maintenance or
+                experiencing technical difficulties. We apologize for any
+                inconvenience and are working to resolve this as quickly as
+                possible.
             </p>
             <p class="description">
-                You can still submit a request below and we'll contact you once service is restored.
+                You can still submit a request below and we'll contact you once
+                service is restored.
             </p>
-            
+
             <div class="form-container">
                 <h2 class="form-title">Submit Request</h2>
                 <form id="fallbackForm">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstname">Firstname</label>
-                            <input type="text" id="firstname" name="firstname" required>
+                            <input
+                                type="text"
+                                id="firstname"
+                                name="firstname"
+                                required
+                            />
                         </div>
                         <div class="form-group">
                             <label for="lastname">Lastname</label>
-                            <input type="text" id="lastname" name="lastname" required>
+                            <input
+                                type="text"
+                                id="lastname"
+                                name="lastname"
+                                required
+                            />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="address">Address</label>
-                        <input type="text" id="address" name="address" required>
+                        <input
+                            type="text"
+                            id="address"
+                            name="address"
+                            required
+                        />
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email">
+                            <input type="email" id="email" name="email" />
                         </div>
                         <div class="form-group">
                             <label for="phonenumber">Phone Number</label>
-                            <input type="tel" id="phonenumber" name="phonenumber">
+                            <input
+                                type="tel"
+                                id="phonenumber"
+                                name="phonenumber"
+                            />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="remarks">Remarks</label>
-                        <textarea id="remarks" name="remarks" rows="3" style="width:100%;padding:12px 16px;border:2px solid #e9ecef;border-radius:6px;font-size:16px;resize:vertical;"></textarea>
+                        <textarea
+                            id="remarks"
+                            name="remarks"
+                            rows="3"
+                            style="
+                                width: 100%;
+                                padding: 12px 16px;
+                                border: 2px solid #e9ecef;
+                                border-radius: 6px;
+                                font-size: 16px;
+                                resize: vertical;
+                            "
+                        ></textarea>
                     </div>
-                    <button type="submit" class="submit-btn">Submit request</button>
+                    <button type="submit" class="submit-btn">
+                        Submit request
+                    </button>
                     <div id="formSuccess" class="success-message">
                         Your request has been submitted successfully!
                     </div>
-                    <div id="formError" class="error-message" style="display:none;background:#f8d7da;border:1px solid #f5c6cb;color:#721c24;padding:12px 16px;border-radius:6px;margin-top:16px;text-align:center;">
-                        Failed to submit request. Please try again or contact us directly.
+                    <div
+                        id="formError"
+                        class="error-message"
+                        style="
+                            display: none;
+                            background: #f8d7da;
+                            border: 1px solid #f5c6cb;
+                            color: #721c24;
+                            padding: 12px 16px;
+                            border-radius: 6px;
+                            margin-top: 16px;
+                            text-align: center;
+                        "
+                    >
+                        Failed to submit request. Please try again or contact us
+                        directly.
                     </div>
                 </form>
             </div>
-            
+
             <div class="refresh-info">
-                <strong>💡 Tip:</strong> This page automatically checks every 30 seconds if the service is back online and will refresh automatically.
+                <strong>💡 Tip:</strong> This page automatically checks every 30
+                seconds if the service is back online and will refresh
+                automatically.
             </div>
         </div>
-        
+
         <script type="text/javascript">
+            let referralParams = {};
+
+            function prefillFormAndStoreParams() {
+                const pageUrlParams = new URLSearchParams(
+                    window.location.search
+                );
+                const referralUrlString = pageUrlParams.get("referralUrl");
+
+                if (referralUrlString) {
+                    try {
+                        const referralUrl = new URL(referralUrlString);
+                        const params = referralUrl.searchParams;
+
+                        params.forEach((value, key) => {
+                            referralParams[key] = value;
+                        });
+
+                        const fieldMapping = {
+                            Firstname: "firstname",
+                            Lastname: "lastname",
+                            Email: "email",
+                            Phone: "phonenumber",
+                        };
+
+                        for (const [param, fieldId] of Object.entries(
+                            fieldMapping
+                        )) {
+                            if (params.has(param)) {
+                                const value = params.get(param);
+                                const element =
+                                    document.getElementById(fieldId);
+                                if (element) {
+                                    element.value = value;
+                                }
+                            }
+                        }
+
+                        const street = params.get("Street") || "";
+                        const housenumber = params.get("Housenumber") || "";
+                        const addition = params.get("Addition") || "";
+                        const zipcode = params.get("Zipcode") || "";
+                        const city = params.get("City") || "";
+
+                        let streetAndNumber = [];
+                        if (street) streetAndNumber.push(street);
+                        if (housenumber) streetAndNumber.push(housenumber);
+                        if (addition) streetAndNumber.push(addition);
+                        let line1 = streetAndNumber.join(" ");
+
+                        let line2parts = [];
+                        if (zipcode) line2parts.push(zipcode);
+                        if (city) line2parts.push(city);
+                        let line2 = line2parts.join(" ");
+
+                        let fullAddress = [line1, line2]
+                            .filter(Boolean)
+                            .join(", ");
+
+                        if (fullAddress) {
+                            document.getElementById("address").value =
+                                fullAddress;
+                        }
+                    } catch (e) {
+                        console.error(
+                            "Invalid referralUrl for prefilling",
+                            referralUrlString,
+                            e
+                        );
+                    }
+                }
+            }
+
+            document.addEventListener(
+                "DOMContentLoaded",
+                prefillFormAndStoreParams
+            );
 
             // Check if server is back online every 30 seconds
             function checkServerStatus() {
                 const urlParams = new URLSearchParams(window.location.search);
-                const referralUrl = urlParams.get('referralUrl');
-                
+                const referralUrl = urlParams.get("referralUrl");
+
                 if (referralUrl) {
                     try {
                         const targetUrl = new URL(referralUrl);
                         const baseUrl = targetUrl.origin;
-                        
+
                         fetch(baseUrl, {
-                            method: 'HEAD',
-                            cache: 'no-cache'
+                            method: "HEAD",
+                            cache: "no-cache",
                         })
-                        .then(response => {
-                            if (response.ok) {
-                                window.location.href = referralUrl;
-                            }
-                        })
-                        .catch(error => {
-                            console.log(`Referral server ${baseUrl} still offline, checking again in 30 seconds...`);
-                        });
+                            .then((response) => {
+                                if (response.ok) {
+                                    window.location.href = referralUrl;
+                                }
+                            })
+                            .catch((error) => {
+                                console.log(
+                                    `Referral server ${baseUrl} still offline, checking again in 30 seconds...`
+                                );
+                            });
                     } catch (e) {
-                        console.error('Invalid referralUrl', referralUrl);
+                        console.error("Invalid referralUrl", referralUrl);
                     }
                 }
             }
-            
+
             // Start checking server status every 30 seconds
             const statusCheckInterval = setInterval(checkServerStatus, 30000);
-            
+
             // Handle form submission
-            document.getElementById('fallbackForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                const firstname = document.getElementById('firstname').value.trim();
-                const lastname = document.getElementById('lastname').value.trim();
-                const address = document.getElementById('address').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const phone = document.getElementById('phonenumber').value.trim();
-                const remarks = document.getElementById('remarks').value.trim();
-                const formError = document.getElementById('formError');
+            document
+                .getElementById("fallbackForm")
+                .addEventListener("submit", function (e) {
+                    e.preventDefault();
 
-                let errorMessage = '';
+                    const firstname = document
+                        .getElementById("firstname")
+                        .value.trim();
+                    const lastname = document
+                        .getElementById("lastname")
+                        .value.trim();
+                    const address = document
+                        .getElementById("address")
+                        .value.trim();
+                    const email = document.getElementById("email").value.trim();
+                    const phone = document
+                        .getElementById("phonenumber")
+                        .value.trim();
+                    const remarks = document
+                        .getElementById("remarks")
+                        .value.trim();
+                    const formError = document.getElementById("formError");
 
-                if (firstname === '' || lastname === '' || address === '') {
-                    errorMessage = 'Please fill out Firstname, Lastname, and Address.';
-                } else if (email === '' && phone === '') {
-                    errorMessage = 'Please provide either an Email or a Phone Number.';
-                }
-                
-                if (errorMessage) {
-                    formError.textContent = errorMessage;
-                    formError.style.display = 'block';
-                    document.getElementById('formSuccess').style.display = 'none';
-                } else {
-                    formError.style.display = 'none';
-                    // Reset to default message in case it was changed by validation
-                    formError.textContent = 'Failed to submit request. Please try again or contact us directly.';
-                    submitViaWebhook(this, e);
-                }
-            });
-            
-            function submitViaWebhook(form, event) {
-                event.preventDefault();
-                
-                const formData = new FormData(form);
-                
-                fetch('https://hook.eu2.make.com/675g8dqas9j5llw2pp5xxfemjeh4t2ev', {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'x-make-apikey': 'offline-homezero-page'
+                    let errorMessage = "";
+
+                    if (firstname === "" || lastname === "" || address === "") {
+                        errorMessage =
+                            "Please fill out Firstname, Lastname, and Address.";
+                    } else if (email === "" && phone === "") {
+                        errorMessage =
+                            "Please provide either an Email or a Phone Number.";
                     }
-                })
-                .then(response => {
-                    if (response.ok) {
-                        document.getElementById('formSuccess').style.display = 'block';
-                        document.getElementById('formError').style.display = 'none';
-                        form.reset();
-                        setTimeout(() => {
-                            document.getElementById('formSuccess').style.display = 'none';
-                        }, 5000);
+
+                    if (errorMessage) {
+                        formError.textContent = errorMessage;
+                        formError.style.display = "block";
+                        document.getElementById("formSuccess").style.display =
+                            "none";
                     } else {
-                        throw new Error('Submission failed');
+                        formError.style.display = "none";
+                        // Reset to default message in case it was changed by validation
+                        formError.textContent =
+                            "Failed to submit request. Please try again or contact us directly.";
+                        submitViaWebhook(e);
                     }
-                })
-                .catch(error => {
-                    document.getElementById('formError').style.display = 'block';
-                    document.getElementById('formSuccess').style.display = 'none';
                 });
+
+            function submitViaWebhook(event) {
+                event.preventDefault();
+
+                const formData = {
+                    firstname: document
+                        .getElementById("firstname")
+                        .value.trim(),
+                    lastname: document.getElementById("lastname").value.trim(),
+                    address: document.getElementById("address").value.trim(),
+                    email: document.getElementById("email").value.trim(),
+                    phonenumber: document
+                        .getElementById("phonenumber")
+                        .value.trim(),
+                    remarks: document.getElementById("remarks").value.trim(),
+                };
+
+                const payload = {
+                    form_data: formData,
+                    referral_params: referralParams,
+                };
+
+                fetch(
+                    "https://hook.eu2.make.com/675g8dqas9j5llw2pp5xxfemjeh4t2ev",
+                    {
+                        method: "POST",
+                        body: JSON.stringify(payload),
+                        headers: {
+                            "Content-Type": "application/json",
+                            "x-make-apikey": "offline-homezero-page",
+                        },
+                    }
+                )
+                    .then((response) => {
+                        if (response.ok) {
+                            document.getElementById(
+                                "formSuccess"
+                            ).style.display = "block";
+                            document.getElementById("formError").style.display =
+                                "none";
+                            document.getElementById("fallbackForm").reset();
+                            setTimeout(() => {
+                                document.getElementById(
+                                    "formSuccess"
+                                ).style.display = "none";
+                            }, 5000);
+                        } else {
+                            throw new Error("Submission failed");
+                        }
+                    })
+                    .catch((error) => {
+                        document.getElementById("formError").style.display =
+                            "block";
+                        document.getElementById("formSuccess").style.display =
+                            "none";
+                    });
             }
         </script>
     </body>
