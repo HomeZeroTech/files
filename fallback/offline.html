@@ -257,27 +257,27 @@
                     <button type="submit" class="submit-btn" data-translate-key="submitButton">
                         Submit request
                     </button>
-                    <div id="formSuccess" class="success-message" data-translate-key="formSuccess">
-                        Your request has been submitted successfully!
-                    </div>
-                    <div
-                        id="formError"
-                        class="error-message"
-                        style="
-                            display: none;
-                            background: #f8d7da;
-                            border: 1px solid #f5c6cb;
-                            color: #721c24;
-                            padding: 12px 16px;
-                            border-radius: 6px;
-                            margin-top: 16px;
-                            text-align: center;
-                        "
-                    >
-                        Failed to submit request. Please try again or contact us
-                        directly.
-                    </div>
                 </form>
+                <div id="formSuccess" class="success-message" data-translate-key="formSuccess">
+                    Your request has been submitted successfully!
+                </div>
+                <div
+                    id="formError"
+                    class="error-message"
+                    style="
+                        display: none;
+                        background: #f8d7da;
+                        border: 1px solid #f5c6cb;
+                        color: #721c24;
+                        padding: 12px 16px;
+                        border-radius: 6px;
+                        margin-top: 16px;
+                        text-align: center;
+                    "
+                >
+                    Failed to submit request. Please try again or contact us
+                    directly.
+                </div>
             </div>
 
             <div class="refresh-info">
@@ -525,6 +525,7 @@
                         .getElementById("remarks")
                         .value.trim();
                     const formError = document.getElementById("formError");
+                    const formSuccess = document.getElementById("formSuccess");
 
                     let errorMessage = "";
 
@@ -537,8 +538,7 @@
                     if (errorMessage) {
                         formError.textContent = errorMessage;
                         formError.style.display = "block";
-                        document.getElementById("formSuccess").style.display =
-                            "none";
+                        formSuccess.style.display = "none";
                     } else {
                         formError.style.display = "none";
                         // Reset to default message in case it was changed by validation
@@ -581,19 +581,37 @@
                 )
                     .then((response) => {
                         if (response.ok) {
+                            const formContainer = document.querySelector('.form-container');
                             const formSuccess = document.getElementById(
                                 "formSuccess"
                             );
+                            
+                            formContainer.innerHTML = '';
                             formSuccess.innerText = getTranslation("formSuccess");
                             formSuccess.style.display = "block";
-                            document.getElementById("formError").style.display =
-                                "none";
-                            document.getElementById("fallbackForm").reset();
-                            setTimeout(() => {
-                                document.getElementById(
-                                    "formSuccess"
-                                ).style.display = "none";
-                            }, 5000);
+                            formSuccess.style.textAlign = 'center';
+                            formContainer.appendChild(formSuccess);
+
+                            const duration = 5 * 1000;
+                            const animationEnd = Date.now() + duration;
+                            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+
+                            function randomInRange(min, max) {
+                              return Math.random() * (max - min) + min;
+                            }
+
+                            const interval = setInterval(function() {
+                              const timeLeft = animationEnd - Date.now();
+
+                              if (timeLeft <= 0) {
+                                return clearInterval(interval);
+                              }
+
+                              const particleCount = 50 * (timeLeft / duration);
+                              confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
+                              confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                            }, 250);
+
                         } else {
                             throw new Error("Submission failed");
                         }
@@ -607,5 +625,6 @@
                     });
             }
         </script>
+        <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     </body>
 </html>
