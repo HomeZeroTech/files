@@ -371,20 +371,19 @@
                         const targetUrl = new URL(referralUrl);
                         const baseUrl = targetUrl.origin;
 
-                        fetch(baseUrl, {
-                            method: "HEAD",
-                            cache: "no-cache",
-                        })
-                            .then((response) => {
-                                if (response.ok) {
-                                    window.location.href = referralUrl;
-                                }
-                            })
-                            .catch((error) => {
-                                console.log(
-                                    `Referral server ${baseUrl} still offline, checking again in 30 seconds...`
-                                );
-                            });
+                        const img = new Image();
+                        img.onload = function () {
+                            // Server is up, redirect
+                            window.location.href = referralUrl;
+                        };
+                        img.onerror = function () {
+                            // Server is still down, try again in 30 seconds
+                            console.log(
+                                `Referral server ${baseUrl} still offline, checking again in 30 seconds...`
+                            );
+                        };
+                        // Add a cache buster to avoid cached responses
+                        img.src = baseUrl + "/favicon.ico?_=" + Date.now();
                     } catch (e) {
                         console.error("Invalid referralUrl", referralUrl);
                     }
