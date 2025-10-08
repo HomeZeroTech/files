@@ -4,6 +4,19 @@
         <meta charset="utf-8" />
         <title>Service Temporarily Unavailable</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Google tag (gtag.js) -->
+        <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-DYDGVKNMG7"
+        ></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+            gtag("config", "G-DYDGVKNMG7");
+        </script>
         <style type="text/css">
             * {
                 box-sizing: border-box;
@@ -175,7 +188,9 @@
     <body>
         <div class="container">
             <div class="icon">🚨</div>
-            <h1 data-translate-key="mainTitle">Service Temporarily Unavailable</h1>
+            <h1 data-translate-key="mainTitle">
+                Service Temporarily Unavailable
+            </h1>
             <p class="subtitle" data-translate-key="subtitle">
                 We're working hard to restore service
             </p>
@@ -197,7 +212,11 @@
                 <form id="fallbackForm">
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="firstname" data-translate-key="labelFirstname">Firstname</label>
+                            <label
+                                for="firstname"
+                                data-translate-key="labelFirstname"
+                                >Firstname</label
+                            >
                             <input
                                 type="text"
                                 id="firstname"
@@ -206,7 +225,11 @@
                             />
                         </div>
                         <div class="form-group">
-                            <label for="lastname" data-translate-key="labelLastname">Lastname</label>
+                            <label
+                                for="lastname"
+                                data-translate-key="labelLastname"
+                                >Lastname</label
+                            >
                             <input
                                 type="text"
                                 id="lastname"
@@ -216,7 +239,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="address" data-translate-key="labelAddress">Address</label>
+                        <label for="address" data-translate-key="labelAddress"
+                            >Address</label
+                        >
                         <input
                             type="text"
                             id="address"
@@ -226,11 +251,17 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="email" data-translate-key="labelEmail">Email</label>
+                            <label for="email" data-translate-key="labelEmail"
+                                >Email</label
+                            >
                             <input type="email" id="email" name="email" />
                         </div>
                         <div class="form-group">
-                            <label for="phonenumber" data-translate-key="labelPhone">Phone Number</label>
+                            <label
+                                for="phonenumber"
+                                data-translate-key="labelPhone"
+                                >Phone Number</label
+                            >
                             <input
                                 type="tel"
                                 id="phonenumber"
@@ -239,7 +270,9 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="remarks" data-translate-key="labelRemarks">Remarks</label>
+                        <label for="remarks" data-translate-key="labelRemarks"
+                            >Remarks</label
+                        >
                         <textarea
                             id="remarks"
                             name="remarks"
@@ -254,11 +287,19 @@
                             "
                         ></textarea>
                     </div>
-                    <button type="submit" class="submit-btn" data-translate-key="submitButton">
+                    <button
+                        type="submit"
+                        class="submit-btn"
+                        data-translate-key="submitButton"
+                    >
                         Submit request
                     </button>
                 </form>
-                <div id="formSuccess" class="success-message" data-translate-key="formSuccess">
+                <div
+                    id="formSuccess"
+                    class="success-message"
+                    data-translate-key="formSuccess"
+                >
                     Your request has been submitted successfully!
                 </div>
                 <div
@@ -281,9 +322,11 @@
             </div>
 
             <div class="refresh-info">
-                <strong data-translate-key="tip">💡 Tip:</strong> <span data-translate-key="refreshText">This page automatically checks every 30
-                seconds if the service is back online and will refresh
-                automatically.</span>
+                <strong data-translate-key="tip">💡 Tip:</strong>
+                <span data-translate-key="refreshText"
+                    >This page automatically checks every 30 seconds if the
+                    service is back online and will refresh automatically.</span
+                >
             </div>
         </div>
 
@@ -372,10 +415,7 @@
                         const key = element.getAttribute("data-translate-key");
                         const translation = getTranslation(key);
 
-                        if (
-                            element.tagName === "STRONG" &&
-                            key === "tip"
-                        ) {
+                        if (element.tagName === "STRONG" && key === "tip") {
                             element.innerText = translation;
                         } else if (
                             element.tagName === "SPAN" &&
@@ -387,9 +427,8 @@
                         }
                     });
 
-                document.getElementById(
-                    "formSuccess"
-                ).innerText = getTranslation("formSuccess");
+                document.getElementById("formSuccess").innerText =
+                    getTranslation("formSuccess");
                 const formError = document.getElementById("formError");
                 formError.innerText = getTranslation("formErrorDefault");
             }
@@ -530,7 +569,9 @@
                     let errorMessage = "";
 
                     if (firstname === "" || lastname === "" || address === "") {
-                        errorMessage = getTranslation("validationErrorRequired");
+                        errorMessage = getTranslation(
+                            "validationErrorRequired"
+                        );
                     } else if (email === "" && phone === "") {
                         errorMessage = getTranslation("validationErrorContact");
                     }
@@ -542,7 +583,8 @@
                     } else {
                         formError.style.display = "none";
                         // Reset to default message in case it was changed by validation
-                        formError.textContent = getTranslation("formErrorDefault");
+                        formError.textContent =
+                            getTranslation("formErrorDefault");
                         submitViaWebhook(e);
                     }
                 });
@@ -581,44 +623,67 @@
                 )
                     .then((response) => {
                         if (response.ok) {
-                            const formContainer = document.querySelector('.form-container');
-                            const formSuccess = document.getElementById(
-                                "formSuccess"
-                            );
-                            
-                            formContainer.innerHTML = '';
-                            formSuccess.innerText = getTranslation("formSuccess");
+                            const formContainer =
+                                document.querySelector(".form-container");
+                            const formSuccess =
+                                document.getElementById("formSuccess");
+
+                            formContainer.innerHTML = "";
+                            formSuccess.innerText =
+                                getTranslation("formSuccess");
                             formSuccess.style.display = "block";
-                            formSuccess.style.textAlign = 'center';
+                            formSuccess.style.textAlign = "center";
                             formContainer.appendChild(formSuccess);
 
                             const duration = 5 * 1000;
                             const animationEnd = Date.now() + duration;
-                            const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
+                            const defaults = {
+                                startVelocity: 30,
+                                spread: 360,
+                                ticks: 60,
+                                zIndex: 0,
+                            };
 
                             function randomInRange(min, max) {
-                              return Math.random() * (max - min) + min;
+                                return Math.random() * (max - min) + min;
                             }
 
-                            const interval = setInterval(function() {
-                              const timeLeft = animationEnd - Date.now();
+                            const interval = setInterval(function () {
+                                const timeLeft = animationEnd - Date.now();
 
-                              if (timeLeft <= 0) {
-                                return clearInterval(interval);
-                              }
+                                if (timeLeft <= 0) {
+                                    return clearInterval(interval);
+                                }
 
-                              const particleCount = 50 * (timeLeft / duration);
-                              confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } }));
-                              confetti(Object.assign({}, defaults, { particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } }));
+                                const particleCount =
+                                    50 * (timeLeft / duration);
+                                confetti(
+                                    Object.assign({}, defaults, {
+                                        particleCount,
+                                        origin: {
+                                            x: randomInRange(0.1, 0.3),
+                                            y: Math.random() - 0.2,
+                                        },
+                                    })
+                                );
+                                confetti(
+                                    Object.assign({}, defaults, {
+                                        particleCount,
+                                        origin: {
+                                            x: randomInRange(0.7, 0.9),
+                                            y: Math.random() - 0.2,
+                                        },
+                                    })
+                                );
                             }, 250);
-
                         } else {
                             throw new Error("Submission failed");
                         }
                     })
                     .catch((error) => {
                         const formError = document.getElementById("formError");
-                        formError.innerText = getTranslation("formErrorDefault");
+                        formError.innerText =
+                            getTranslation("formErrorDefault");
                         formError.style.display = "block";
                         document.getElementById("formSuccess").style.display =
                             "none";
