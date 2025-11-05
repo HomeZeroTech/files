@@ -438,6 +438,16 @@
                     window.location.search
                 );
                 const referralUrlString = pageUrlParams.get("referralUrl");
+                const contextParam = pageUrlParams.get("context");
+                const reasonParam = pageUrlParams.get("reason");
+
+                if (contextParam) {
+                    referralParams.context = contextParam;
+                }
+
+                if (reasonParam) {
+                    referralParams.reason = reasonParam;
+                }
 
                 if (referralUrlString) {
                     try {
